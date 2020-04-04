@@ -1,0 +1,53 @@
+#include<cstdio>
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<cmath>
+#pragma warning (disable:4996)
+using namespace std;
+typedef long long ll;
+char mp[110][110];
+bool vit[110][110] = {true};
+int a,b;//地图大小
+int dir[4][2] = { {0,1}, {0,-1}, {1,0}, {-1,0} };//向四个方向搜索
+int sum = 0;
+int dfs(int m, int n)
+{
+	vit[m][n] = false;
+	for (int k = 0; k < 4; ++k)
+	{
+		int i = m + dir[k][0];
+		int j = n + dir[k][1];
+		if (mp[i][j] == '.' && vit[i][j] && i >= 0 && i < b && j >= 0 && j < a)
+		{
+			dfs(i, j);
+			sum++;//每经过一块black+1
+		}
+	}
+	return sum;
+}
+int main()
+{
+	while (scanf("%d%d", &a, &b))
+	{
+		if (a == 0) break;
+		for (int i = 0; i < b; ++i)
+			scanf("%s", mp[i]);
+		memset(vit, true, sizeof(vit));
+		int m = 0, n = 0;
+		for(int i=0;i<b;++i)
+			for(int j=0;j<a;++j)
+				if (mp[i][j] == '@')
+				{
+					m = i;
+					n = j;
+					break;
+				}
+		
+		cout << dfs(m,n)+1<< endl;//这个人从当前位置可到达的地板数量，只需要一次搜索，并且算上脚下这块
+		sum = 0;
+		
+
+	}
+	return 0;
+}
