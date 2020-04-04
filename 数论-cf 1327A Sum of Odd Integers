@@ -1,0 +1,24 @@
+//n个奇数是否可以组成m
+//条件1：m，n奇偶性相同
+//条件2：m>=n*n（未证明）
+#include<stdio.h>
+#include<iostream>
+#pragma warning(disable:4996)
+using namespace std;
+typedef long long ll;
+int main()
+{
+	ll t;
+	cin >> t;
+	while (t--)
+	{
+		ll m, n;
+		cin >> m>>n;
+		if (m % 2 == n % 2 && m >= n * n)
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+			
+	}
+	return 0;
+}
