@@ -1,0 +1,30 @@
+
+#include<cstdio>
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<cmath>
+#pragma warning (disable:4996)
+using namespace std;
+typedef long long ll;
+void reverseString(char* s, int sSize) {
+    if (sSize == 1 || sSize == 0)  return ;//如果奇数个字符则长度为1中止，偶数个长度为0中止对调
+    else
+    {
+        char p = *s;
+        *s = *(s + sSize);
+        *(s + sSize) = p;
+        reverseString(s + 1, sSize - 2);
+        //完成首尾对调，字符串首和尾改变，长度改变，再次循环进行对调
+    }
+}
+int main()
+{
+    char s[1000];
+    scanf("%s", s);
+    int l = strlen(s)-1;
+    reverseString(s, l);
+    for (int i = 0; i <= l; ++i)
+        printf("%c", s[i]);
+    return 0;
+}
