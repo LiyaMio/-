@@ -1,0 +1,49 @@
+#include<cstdio>
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<cmath>
+#pragma warning (disable:4996)
+using namespace std;
+typedef long long ll;
+char mp[110][110];//初始化地图
+bool vit[110][110] = {true};//标记
+int a,b;//地图的大小
+int dir[8][2] = { {1,1}, {1,-1}, {-1,1}, {-1,-1}, {0,1}, {0,-1}, {1,0}, {-1,0} };//向八个方向挖
+void dfs(int m, int n)
+{
+	vit[m][n] = false;//遍历过标记
+	for (int i = 0; i < 8; ++i)
+	{
+		int j;
+		int k;
+		j = m + dir[i][0];//向八个方向搜索
+		k = n + dir[i][1];
+		if (mp[j][k] == '@' && vit[j][k]==true  && j < a && j >= 0 && k < b && k >= 0)//如果有石油继续搜索，连起来的算一块
+			dfs(j, k);
+	}
+}
+int main()
+{
+	int m, n;
+	while (scanf("%d%d", &a, &b) != EOF)
+	{
+		if (a == 0) break;
+		for (int i = 0; i < a; ++i)
+			scanf("%s", mp[i]);
+		memset(vit, true, sizeof(vit));
+		int sum = 0;
+		for(int i=0;i<a;++i)
+			for (int j = 0; j < b; ++j)
+			{
+				if (mp[i][j] == '@' && vit[i][j])
+				{
+					dfs(i,j);
+					sum++;
+				}
+			}
+		cout << sum << endl;
+	}
+	
+	return 0;
+}
