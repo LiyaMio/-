@@ -1,0 +1,21 @@
+//极其简单
+//注意：a,b是长度；x,y是坐标
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		int a, b, x, y;
+		scanf("%d%d%d%d", & a, &b, &x, &y);
+		
+			x += 1;
+			y += 1;
+			int m = max(x-1, a - x) * b;//再求最大长度是，x,y之前的长度需要换成相应的坐标，因为之前把x,y转变成了长度
+			int n = max(y-1, b - y) * a;//而x,y所在的行与列必须要去掉
+			cout << max(m, n) << endl;
+	
+	}
+
+	return 0;
+}
