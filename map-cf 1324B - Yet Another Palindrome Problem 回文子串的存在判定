@@ -1,0 +1,36 @@
+//不改变顺序的情况下构造长度大于1的回文子串
+map<int, int> v;
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		v.clear();
+		int n;
+		int m;
+		int f = 0;
+		cin >> n;
+		for (int i = 1; i <= n; ++i)
+		{
+			cin >> m;
+			if (v[m] == 0)
+				v[m] = i;
+			else
+			{
+				int d = i - v[m];
+				if (d > 1)
+				{
+					f = 1;
+					//break;//输入与判断一起进行所以不能break
+				}
+			}
+		}
+		if (f == 1)
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+		
+	}
+	return 0;
+}
