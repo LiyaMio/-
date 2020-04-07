@@ -1,0 +1,31 @@
+char a[24][24];
+char b[24][24];
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	for (int i = 0; i < n; ++i)
+		cin >> a[i];
+	for (int i = 0; i < m; ++i)
+		cin >> b[i];
+	int z;
+	cin >> z;
+	while (z--)
+	{
+		int t;
+		cin >> t;
+		int x = t % n;
+		if (x == 0)//如果是最后一个输出的下标为最后一个即n-1
+			x = n - 1;
+		else//如果不是最后一个，输出的也是n-1
+			x = x - 1;
+		int y = t % m;
+		if (y == 0)
+			y = m - 1;
+		else
+			y = y - 1;
+		cout << a[ x] << b[y ] << endl;
+	}
+	
+	return 0;
+}
