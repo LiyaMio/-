@@ -1,0 +1,47 @@
+//通过分解质因数的方法来寻找限制条件
+//60=2*3*10；
+//所以要满足的条件
+//和对3取模为零
+//必须有0
+//0的个数为1倒数第二位必须是偶数（使得这个数对20取模为零）
+//附：7的倍数
+//这个数除去个位的其他为数-2*各位为7的倍数
+//eg：6139   613-9*2=595   59-5*2=47得出他是7的倍数
+
+
+
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		int a[9] = { 0 };
+		char c[105];
+		cin >> c;
+		int lc = strlen(c);
+		for (int i = 0; i < lc; ++i)
+			a[c[i] - '0']++;
+		int sum = 0;
+		for (int i = 0; i < 9; ++i)
+			sum += a[i] * i;
+		if (sum == 0)
+			cout << "red" << endl;
+		else if (sum % 3 != 0||a[0]==0)
+			cout << "cyan" << endl;
+		else
+		{
+			if (a[0] == 1)
+			{
+				if (a[2] != 0 || a[4] != 0 || a[6] != 0 || a[8] != 0)
+					cout << "red" << endl;
+				else
+					cout << "cyan" << endl;
+			}
+			else
+				cout << "red" << endl;
+		}
+
+	}
+	return 0;
+}
