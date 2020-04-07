@@ -1,0 +1,19 @@
+//可以看作约瑟夫环的变形？？我也不清楚
+
+
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		int a[3];
+		cin >> a[0] >> a[1] >> a[2];
+		sort(a, a + 3);
+		if (a[0] + a[1] >= a[2]-1)//-1是因为最多的那个可以两头都是他
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+	}
+	return 0;
+}
