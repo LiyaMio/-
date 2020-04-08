@@ -1,0 +1,31 @@
+//对于10-1000每十个数就有1个回文数
+//对于1000-10000每100个数就有1个回文数
+
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		int n;
+		cin >> n；
+		int m = n;
+		int len = 0;
+		while (m / 10)
+			{
+				len++;
+				m /= 10;
+			}
+		int ans = len * 9;
+		int num = 1;
+		while (len)
+			{
+				num = num * 10 + 1;
+				len--;
+			}
+		ans += n / num;
+		cout << ans << endl;
+		
+	}
+	return 0;
+}
