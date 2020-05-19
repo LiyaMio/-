@@ -1,0 +1,47 @@
+90度 180度 270度旋转共四种特定的组合
+int sum(int a, int b, int c, int d)
+{
+	int s = a * 1000 + b * 100 + c * 10 + d;
+	return s;
+}
+int main()
+{
+	int n;
+	cin >> n;
+	char ch[3] = "**";
+	int a, b;
+	cin >> a >> b;
+	int s[4000] = { 0 };
+	s[0] = sum(a / 10, a % 10, b % 10, b / 10);
+	s[1] = sum( a % 10, b % 10, b / 10, a / 10);
+	s[2] = sum( b % 10, b / 10, a / 10, a % 10);
+	s[3] = sum( b / 10, a/ 10, a % 10, b % 10);
+	int cnt = 4;
+	int ans = 1;
+	for (int i = 0; i < n - 1; ++i)
+	{
+		cin >> ch;
+		int c; int d;
+		cin >> c >> d;
+		int f = 0;
+		for (int j = 0; j < cnt; ++j)
+		{
+			if (sum(c / 10, c % 10, d % 10, d / 10) == s[j])
+			{
+				f = 1;
+				break;
+			}
+		}
+		if (f == 0)
+		{
+			ans++;
+			s[cnt++] = sum(c / 10, c % 10, d % 10, d / 10);
+			s[cnt++] = sum(c % 10, d % 10, d / 10, c / 10);
+			s[cnt++] = sum(d % 10, d / 10, c / 10, c % 10);
+			s[cnt++] = sum(d / 10, c / 10, c % 10, d % 10);
+		}
+
+	}
+	cout << ans << endl;
+	return 0;
+}
