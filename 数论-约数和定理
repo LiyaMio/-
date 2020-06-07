@@ -1,0 +1,80 @@
+数学类分析
+
+质因数分解，就是将一个数分解成为  p1c1×p2c2×…×pncnp1c1×p2c2×…×pncn 比如说24=23×3124=23×31
+唯一分解定律，就是字面意思
+约数和公式，如下文所示
+AB=(1+p11+p12+.....+p1B∗c1)×(1+p22+.....+pnB×c2AB=(1+p11+p12+.....+p1B∗c1)×(1+p22+.....+pnB×c2)
+sum(p,c)=1+p+p2+…+pc
+
+
+
+https://www.acwing.com/problem/content/description/99/
+
+
+
+
+//灿神做法
+#include<iostream>
+using namespace std;
+const int mod=9901;
+
+//快速幂
+int quick(int a,int b)
+{
+    int res=1;
+    a=a%mod;
+    while(b)
+    { 
+        if(b&1) res=(res*a)%mod;
+        a=(a*a)%mod;
+        b>>=1;
+    }
+    return res;
+}
+
+//sum函数用来求某个数的幂次项的等比数列的和
+int sum(int p,int k)
+{
+    //k如果是奇数的话，从0到k即为偶数个数
+    if(k==0) return 1;
+    //k是偶数的时候，则我们(k-1)是奇数，即(k-1)项是偶数,则我们可以把第k项
+    //单独把p拿出来,然后对(k-1)再调用sum
+    if(k%2==0)
+    {
+        //这里少了个p的0次方，所以把1加上
+        return (p%mod*sum(p,k-1)+1)%mod;
+    }
+    //否则k如果是奇数，则质因数有(k+1)即偶数项，就去套我们的公式
+    return (1+quick(p,k/2+1))*sum(p,k/2)%mod;
+}
+
+int main(){
+
+    int A,B;
+    cin>>A>>B;
+    int res=1;
+
+    //这里是想看i是不是质因数，以及得出i的幂次
+    //比如，对于12，可以分解成2^2*3
+    for(int i=2;i<=A;i++)
+    {
+        int s=0;
+        //这里的操作是求当我们的质因数是i的时候，它的质因数的幂次项能到几
+        while(A%i==0)
+        {
+            s++;
+            A/=i;
+        }
+        //i,s即相当于我们的质因数以及它的幂次项，即pk和k
+        if(s) res=res*sum(i,s*B)%mod;
+    }
+    //ifA为0的话，那么res=0，。。。。？？？A什么时候为0呢？？？？？
+    if(!A) res=0;
+    cout<<res<<endl;
+    return 0;
+}
+
+作者：CB
+链接：https://www.acwing.com/solution/content/933/
+来源：AcWing
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
